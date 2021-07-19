@@ -5,7 +5,9 @@ CFLAGS+=	-g
 
 CC=		clang
 
-build: $(OBJS)
+build: $(CMD)
+
+$(CMD): $(OBJS)
 	$(CC) $(CFLAGS) -o $(CMD) $(OBJS)
 
 csv2tsv.o: csv2tsv.c
