@@ -1,9 +1,9 @@
-OBJS=		csv2tsv.o util.o
-CMD=		csv2tsv.exe
+OBJS=	csv2tsv.o util.o
+CMD=	csv2tsv.exe
 
-CFLAGS+=	-g
+CFLAGS+=-g
 
-CC=		clang
+CC=	clang
 
 build: $(CMD)
 

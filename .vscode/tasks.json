@@ -4,12 +4,9 @@
         {
             "label": "Clang",
             "type": "process",
-            "command": "clang.exe",
+            "command": "make",
             "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/csv2tsv.exe"
+                "build"
             ],
             "problemMatcher": [],
             "group": {
