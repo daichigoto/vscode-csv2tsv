@@ -1,5 +1,6 @@
-OBJS=	csv2tsv.o util.o
 CMD=	csv2tsv.exe
+SRCS=	csv2tsv.c util.c
+OBJS=	$(SRCS:.c=.o)
 
 CFLAGS+=-g
 
@@ -10,11 +11,8 @@ build: $(CMD)
 $(CMD): $(OBJS)
 	$(CC) $(CFLAGS) -o $(CMD) $(OBJS)
 
-csv2tsv.o: csv2tsv.c
-	$(CC) $(CFLAGS) -c csv2tsv.c -o csv2tsv.o
-
-util.o: util.c
-	$(CC) $(CFLAGS) -c util.c -o util.o
+.c.o:
+	$(CC) -c $< -o $@
 
 clean:
 	rm -f "$(CMD)"
