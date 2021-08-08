@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "csv2tsv.h"
+#include "main.h"
 
 int main(int argc, char *argv[]) {
   char *csvdata, *tsvdata;
@@ -11,10 +11,10 @@ int main(int argc, char *argv[]) {
   csvdata = file2str(argv[1]);
   csvdata_bytes = strlen(csvdata);
 
-  tsvdata_bytes = csvdata_bytes + 1;
-  tsvdata = calloc(sizeof(char), tsvdata_bytes);
+  tsvdata_bytes = csvdata_bytes;
+  tsvdata = calloc(sizeof(char), tsvdata_bytes + 1);
 
-  csv2tsv(csvdata, csvdata_bytes, tsvdata, csvdata_bytes);
+  csv2tsv(csvdata, csvdata_bytes, tsvdata, tsvdata_bytes);
 
   printf("%s", tsvdata);
 
