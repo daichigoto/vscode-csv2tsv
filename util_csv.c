@@ -19,12 +19,12 @@ int csv2tsv(const char *ibuf, int ibufsize, char *obuf, int obufsize) {
   p_o = obuf;
 
   // Indicates the state during parsing.
-  typedef enum RECORD_STATUS {
-    RECORD_END,
-    IN_RECORD,
-    IN_QUOTED_RECORD
+  typedef enum FIELD_STATUS {
+    FIELD_END,
+    IN_FIELD,
+    IN_QUOTED_FIELD
   } record_status;
-  record_status rs = RECORD_END;
+  record_status rs = FIELD_END;
 
   record_outputed = false;
   while (1) {
@@ -32,39 +32,39 @@ int csv2tsv(const char *ibuf, int ibufsize, char *obuf, int obufsize) {
       if (!record_outputed) {
         // nothing
       }
-      rs = RECORD_END;
+      rs = FIELD_END;
       *p_o = gettsvchar('\n');
       ++p_o;
       ++tsv_len;
     } else {
       switch (rs) {
-      case RECORD_END:
+      case FIELD_END:
         if (',' == *p_i) {
           // nothing
         } else if ('"' == *p_i) {
-          rs = IN_QUOTED_RECORD;
+          rs = IN_QUOTED_FIELD;
         } else {
-          rs = IN_RECORD;
+          rs = IN_FIELD;
           *p_o = gettsvchar(*p_i);
           ++p_o;
           ++tsv_len;
         }
         break;
-      case IN_RECORD:
+      case IN_FIELD:
         if (',' == *p_i) {
-          rs = RECORD_END;
+          rs = FIELD_END;
         } else {
           *p_o = gettsvchar(*p_i);
           ++p_o;
           ++tsv_len;
         }
         break;
-      case IN_QUOTED_RECORD:
+      case IN_QUOTED_FIELD:
         if ('"' == *p_i) {
           if (p_i == end_i) {
-            rs = RECORD_END;
+            rs = FIELD_END;
           } else if (',' == *(p_i + 1)) {
-            rs = RECORD_END;
+            rs = FIELD_END;
             ++p_i;
           } else if ('"' == *(p_i + 1)) {
             *p_o = gettsvchar(*p_i);
@@ -81,14 +81,14 @@ int csv2tsv(const char *ibuf, int ibufsize, char *obuf, int obufsize) {
       }
 
       switch (rs) {
-      case RECORD_END:
+      case FIELD_END:
         *p_o = '\t';
         ++p_o;
         ++tsv_len;
         record_outputed = false;
         break;
-      case IN_RECORD:
-      case IN_QUOTED_RECORD:
+      case IN_FIELD:
+      case IN_QUOTED_FIELD:
         break;
       }
     }
