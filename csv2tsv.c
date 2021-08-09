@@ -3,10 +3,17 @@
 int
 main(int argc, char *argv[])
 {
-    char dummybuf1[4096];
-    char dummybuf2[4096];
+    const int bufsize = 1024*1024*10;
+    char buf[bufsize];
+    int len;
+    FILE *fp;
 
-    csv2tsv(dummybuf1, dummybuf2);
+    fp = fopen(argv[1], "r");
+    len = fread(buf, 1, bufsize, fp);
+    
+    csv2tsv(buf, len);
+
+    fclose(fp);
 
     return 0;
 }
