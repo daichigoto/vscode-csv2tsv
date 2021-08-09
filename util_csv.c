@@ -91,7 +91,7 @@ csv2tsv(const char *ibuf, int ibufsize, char *obuf, int obufsize)
 
 			switch (rs) {
 			case RECORD_END:
-				*p_o = gettsvchar('\t');
+				*p_o = '\t';
 				++p_o;
 				++tsv_len;
 				record_outputed = false;
