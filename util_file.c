@@ -6,7 +6,7 @@ char *
 file2str(const char *filepath)
 {
 	struct stat st;
-	int	filesize;
+	int	filesize, c;
 
 	char	*buf, *p;
 
@@ -20,7 +20,11 @@ file2str(const char *filepath)
 
 	fp = fopen(filepath, "r");
 	for (int i = 0; i < filesize; i++) {
-	 *p = fgetc(fp);
+	 c = fgetc(fp);
+	 if (EOF == c) {
+	  break;
+	 }
+	 *p = (char)c;
 	  ++p;
 	}
 

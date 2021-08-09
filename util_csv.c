@@ -1,4 +1,4 @@
-#include "csv2tsv.h"
+#include <stdbool.h>
 
 static bool record_outputed;
 

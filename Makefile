@@ -1,5 +1,5 @@
 CMD=	csv2tsv.exe
-SRCS=	csv2tsv.c util.c
+SRCS=	csv2tsv.c util_csv.c util_file.c
 OBJS=	$(SRCS:.c=.o)
 
 CFLAGS+=-g
