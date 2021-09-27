@@ -1,11 +1,10 @@
 CMD=	csv2tsv.exe
 
-CFLAGS+=-g
-
 SRCS=	$(wildcard *.c)
 OBJS=	$(SRCS:.c=.o)
 
 CC=	clang
+CFLAGS+=-g
 
 build: $(CMD)
 
@@ -16,7 +15,7 @@ $(CMD): $(OBJS)
 	$(CC) -c $< -o $@
 
 clean:
-	rm -f "$(CMD)"
-	rm -f *.o
+	rm -f $(CMD)
+	rm -f $(OBJS)
 	rm -f *.ilk
 	rm -f *.pdb

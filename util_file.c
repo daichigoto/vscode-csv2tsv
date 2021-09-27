@@ -13,7 +13,7 @@ char *file2str(const char *filepath) {
   stat(filepath, &st);
   filesize = st.st_size;
 
-  buf = calloc(sizeof(char), filesize + 1);
+  buf = calloc(filesize + 1, sizeof(char));
   p = buf;
 
   fp = fopen(filepath, "r");
