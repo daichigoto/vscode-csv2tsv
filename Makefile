@@ -18,7 +18,7 @@ test:
 	pwsh .\tests\test001.ps1
 
 clean:
-	rm -f $(CMD)
-	rm -f $(OBJS)
+	rm -f *.exe
+	rm -f *.o
 	rm -f *.ilk
 	rm -f *.pdb
