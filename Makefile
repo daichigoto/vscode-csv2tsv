@@ -14,6 +14,9 @@ $(CMD): $(OBJS)
 .c.o:
 	$(CC) -c $< -o $@
 
+test:
+	pwsh .\tests\test001.ps1
+
 clean:
 	rm -f $(CMD)
 	rm -f $(OBJS)
