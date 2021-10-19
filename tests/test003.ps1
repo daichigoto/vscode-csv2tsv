@@ -1,8 +1,8 @@
 $f = New-TemporaryFile
 
-.\csv2tsv.exe .\data\doublequotes.csv > $f
+.\csv2tsv.exe .\data\spaces.csv > $f
 
-C:\Windows\System32\fc.exe .\data\doublequotes.tsv $f > $null
+C:\Windows\System32\fc.exe .\data\spaces.tsv $f > $null
 
 if ($?) {
 	echo 'テスト001: 成功'
