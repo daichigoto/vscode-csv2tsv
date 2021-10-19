@@ -15,7 +15,7 @@ $(CMD): $(OBJS)
 	$(CC) -c $< -o $@
 
 test: $(CMD)
-	pwsh .\tests\test001.ps1
+	pwsh .\tests\test.ps1
 
 clean:
 	rm -f *.exe
