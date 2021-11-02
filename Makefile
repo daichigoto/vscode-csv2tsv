@@ -5,6 +5,7 @@ OBJS=	$(SRCS:.c=.o)
 
 CC=	clang
 CFLAGS+=-g
+EXIST=	cmd.exe //C if exist
 
 build: $(CMD)
 
@@ -14,11 +15,22 @@ $(CMD): $(OBJS)
 .c.o:
 	$(CC) -c $< -o $@
 
-test: $(CMD)
+test: test-kyua
+
+test-kyua: $(CMD)
+	cd tests; kyua test
+
+test-original: $(CMD) 
 	pwsh .\tests\test.ps1
 
-clean:
-	rm -f *.exe
-	rm -f *.o
-	rm -f *.ilk
-	rm -f *.pdb
+report: $(CMD) clean-report
+	cd tests; kyua report-html
+
+clean: clean-report
+	$(EXIST) $(CMD) del $(CMD)
+	$(EXIST) main.o del $(OBJS)
+	$(EXIST) $(CMD:.exe=.ilk) del $(CMD:.exe=.ilk)
+	$(EXIST) $(CMD:.exe=.pdb) del $(CMD:.exe=.pdb)
+
+clean-report:
+	$(EXIST) .\tests\html rmdir .\tests\html //S //Q

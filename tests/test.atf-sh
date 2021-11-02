@@ -1,0 +1,57 @@
+#!/usr/bin/env atf-sh
+
+atf_test_case normal
+normal_head() {
+	atf_set "descr" "Normal data handling test"
+}
+
+normal_body() {
+	atf_check -s ignore \
+		-o file:$(atf_get_srcdir)/../data/zip.tsv \
+		-x "$(atf_get_srcdir)/../csv2tsv.exe " \
+		   "$(atf_get_srcdir)/../data/zip.csv"
+}
+
+atf_test_case empty
+empty_head() {
+	atf_set "descr" "Emtpy file handling test"
+}
+
+empty_body() {
+	atf_check -s ignore \
+		-o file:$(atf_get_srcdir)/../data/empty.tsv \
+		-x "$(atf_get_srcdir)/../csv2tsv.exe " \
+		   "$(atf_get_srcdir)/../data/empty.csv"
+}
+
+atf_test_case doublequotes
+doublequotes_head() {
+	atf_set "descr" "Double quotation handling test"
+}
+
+doublequotes_body() {
+	atf_check -s ignore \
+		-o file:$(atf_get_srcdir)/../data/doublequotes.tsv \
+		-x "$(atf_get_srcdir)/../csv2tsv.exe " \
+		   "$(atf_get_srcdir)/../data/doublequotes.csv"
+}
+
+atf_test_case spaces
+spaces_head() {
+	atf_set "descr" "Spaces handling test"
+}
+
+spaces_body() {
+	atf_check -s ignore \
+		-o file:$(atf_get_srcdir)/../data/spaces.tsv \
+		-x "$(atf_get_srcdir)/../csv2tsv.exe " \
+		   "$(atf_get_srcdir)/../data/spaces.csv"
+}
+
+atf_init_test_cases()
+{
+	atf_add_test_case normal
+	atf_add_test_case empty
+	atf_add_test_case doublequotes
+	atf_add_test_case spaces
+}
