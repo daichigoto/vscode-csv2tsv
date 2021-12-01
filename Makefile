@@ -32,6 +32,7 @@ clean: clean-report
 	$(EXIST) $(CMD:.exe=.ilk) del $(CMD:.exe=.ilk)
 	$(EXIST) $(CMD:.exe=.pdb) del $(CMD:.exe=.pdb)
 	$(EXIST) nul del *.tmp
+	$(EXIST) csv2tsv.exe.stackdump del csv2tsv.exe.stackdump
 
 clean-report:
 	$(EXIST) .\tests\html rmdir .\tests\html //S //Q
