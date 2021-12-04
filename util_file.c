@@ -14,7 +14,7 @@ char *file2str(const char *filepath) {
     NULL,                      // デフォルトセキュリティ
     OPEN_EXISTING,             // 既存のファイルを開く
     FILE_ATTRIBUTE_NORMAL,     // 通常のファイル
-    NULL);                     // 属性びフラグなし
+    NULL);                     // 属性およびフラグなし
 
   // ファイルが開けなかった場合の処理
   if (INVALID_HANDLE_VALUE == hFile) {
@@ -49,9 +49,14 @@ char *file2str(const char *filepath) {
   }
 
   /*
-   * 開いたファイルを閉じる
+   * ファイルを閉じる
    */
   CloseHandle(hFile);
+
+  /*
+   * ヒープを閉じる
+   */
+  CloseHandle(hHeap);
 
   return buf;
 }
